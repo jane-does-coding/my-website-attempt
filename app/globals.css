@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme inline {
+	--color-ink: #111110;
+	--color-paper: #f5f4f0;
+	--color-flame: #ec3750;
+	--font-sans: var(--font-bricolage), sans-serif;
+	--font-serif: var(--font-newsreader), serif;
+}
+
+html {
+	background: #f5f4f0;
+	color: #111110;
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: var(--font-bricolage), sans-serif;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+::selection {
+	background: #ec3750;
+	color: #f5f4f0;
+}
+
+.link {
+	background-image: linear-gradient(#ec3750, #ec3750);
+	background-size: 0% 0.08em;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size 0.35s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+	background-size: 100% 0.08em;
+}
+
+.rise {
+	opacity: 0;
+	transform: translateY(2.4vh);
+	animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+	animation-delay: calc(var(--i, 0) * 0.08s + 0.1s);
+}
+
+@keyframes rise {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.reveal {
+	opacity: 0;
+	transform: translateY(3vh);
+	transition:
+		opacity 0.8s ease,
+		transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.shown {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rise,
+	.reveal {
+		opacity: 1;
+		transform: none;
+		animation: none;
+		transition: none;
+	}
+	html {
+		scroll-behavior: auto;
+	}
+}
